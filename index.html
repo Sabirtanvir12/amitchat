@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmitChat AI | Premium Chat Experience</title>
+    <title>BotChat AI | Premium Chat Experience</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -382,7 +382,7 @@
         <div class="chat-header">
             <div class="logo">A</div>
             <div class="header-text">
-                <h1>AmitChat AI</h1>
+                <h1>BotChat AI</h1>
                 <p>Premium AI Assistant</p>
             </div>
             <div class="status-dot"></div>
@@ -390,13 +390,13 @@
         
         <div class="chat-messages" id="chat-messages">
             <div class="message bot-message" style="animation-delay: 0.1s; opacity: 1; transform: none;">
-                Hello! I'm your AmitChat AI assistant. How can I help you today?
+                Hello! I'm your BotChat AI assistant. How can I help you today?
                 <span class="message-time">Just now</span>
             </div>
         </div>
         
         <div class="chat-input-container">
-            <input type="text" class="chat-input" id="user-input" placeholder="Message AmitChat AI..." autocomplete="off">
+            <input type="text" class="chat-input" id="user-input" placeholder="Message BotChat AI..." autocomplete="off">
             <button class="send-button" id="send-button">
                 <i class="fas fa-paper-plane"></i>
             </button>
@@ -409,12 +409,12 @@
             const userInput = document.getElementById('user-input');
             const sendButton = document.getElementById('send-button');
             
-            // OpenRouter configuration
-            const OPENROUTER_API_KEY = 'your-openrouter-api-key'; // Replace with your OpenRouter API key
-            const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
-            const MODEL_NAME = 'openai/gpt-3.5-turbo'; // You can change this to any model supported by OpenRouter
             
-            // Function to add a message to the chat
+            const OPENROUTER_API_KEY = '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'; // Replace with your OpenRouter API key
+            const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
+            const MODEL_NAME = 'openai/gpt-3.5-turbo';
+            
+           
             function addMessage(content, isUser, isTyping = false) {
                 const messageDiv = document.createElement('div');
                 messageDiv.classList.add('message', isUser ? 'user-message' : 'bot-message');
@@ -431,13 +431,13 @@
                 chatMessages.appendChild(messageDiv);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
                 
-                // Trigger animation
+                
                 setTimeout(() => {
                     messageDiv.style.animationDelay = '0s';
                 }, 10);
             }
             
-            // Function to show typing indicator
+            
             function showTypingIndicator() {
                 const typingDiv = document.createElement('div');
                 typingDiv.classList.add('typing-indicator');
@@ -451,7 +451,7 @@
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
             
-            // Function to hide typing indicator
+            
             function hideTypingIndicator() {
                 const typingIndicator = document.getElementById('typing-indicator');
                 if (typingIndicator) {
@@ -459,7 +459,7 @@
                 }
             }
             
-            // Function to simulate typing effect
+            
             function typeResponse(response, callback) {
                 let i = 0;
                 const responseDiv = document.createElement('div');
@@ -482,7 +482,7 @@
                 }, 20);
             }
             
-            // Function to call OpenRouter API
+            
             async function getAIResponse(userMessage) {
                 showTypingIndicator();
                 
@@ -492,15 +492,15 @@
                         headers: {
                             'Content-Type': 'application/json',
                             'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
-                            'HTTP-Referer': window.location.href, // Required by OpenRouter
-                            'X-Title': 'AmitChat AI' // Optional but recommended
+                            'HTTP-Referer': window.location.href, 
+                            'X-Title': 'BotChat AI' 
                         },
                         body: JSON.stringify({
                             model: MODEL_NAME,
                             messages: [
                                 {
                                     role: "system",
-                                    content: "You are a premium AI assistant named AmitChat. Provide concise, helpful responses with a professional tone. When asked about your creator, respond that Sabir Khan created you."
+                                    content: "You are a premium AI assistant named BotChat. Provide concise, helpful responses with a professional tone. When asked about your creator, respond that Sabir Khan created you."
                                 },
                                 {
                                     role: "user",
@@ -535,16 +535,15 @@
                 }
             }
             
-            // Function to handle user message
+            
             async function handleUserMessage() {
                 const message = userInput.value.trim();
                 if (message === '') return;
                 
-                // Add user message to chat
+                
                 addMessage(message, true);
                 userInput.value = '';
                 
-                // Special case for creator question
                 const lowerMessage = message.toLowerCase();
                 if (lowerMessage.includes('creator') || lowerMessage.includes('who made you') || 
                     lowerMessage.includes('who created you')) {
@@ -552,14 +551,13 @@
                     return;
                 }
                 
-                // Get AI response
                 const response = await getAIResponse(message);
                 
-                // Show response
+          
                 typeResponse(response);
             }
             
-            // Event listeners
+          
             sendButton.addEventListener('click', handleUserMessage);
             
             userInput.addEventListener('keypress', function(e) {
@@ -568,7 +566,6 @@
                 }
             });
             
-            // Focus input field on page load
             userInput.focus();
         });
     </script>
